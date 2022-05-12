@@ -1327,8 +1327,8 @@ canvas:not(#ribbon-canvas),
   --global-font-size: 14px;
   --global-bg: #fff;
   --font-color: #4c4948;
-  --hr-border: #bfb2c8;
-  --hr-before-color: #a693b2;
+  --hr-border: #dec1ea;
+  --hr-before-color: #d1a8e1;
   --search-bg: #f6f8fa;
   --search-input-color: #4c4948;
   --search-result-title: #4c4948;
@@ -1524,7 +1524,7 @@ img:not([src]) {
 blockquote {
   margin: 0 0 20px;
   padding: 12px 15px;
-  border-left: 3px solid #7f668f;
+  border-left: 3px solid #3c2b3e;
   background-color: var(--blockquote-bg);
   color: var(--blockquote-color);
 }
