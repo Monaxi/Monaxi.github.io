@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="参考了：Hyemin Kim’s blog ​		在Markdown文档中添加网络图片时，可以使用命令![&#39;图片名称&#39;](图片网络地址)实现， ​		在Markdown文档中添加本地图片，可以进行以下设置 第一步 配置 建立**资源文件夹(Asset Floder)**，用来保存添加到博文中的本地图片  ​		在本地Hexo根目录下的source文件夹中创建一个名为 images">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Hexo博文添加本地图片方法（基于Mac上的Typora编辑器）">
+<meta property="og:url" content="http://example.com/2022/05/12/%E5%9C%A8Hexo%E5%8D%9A%E6%96%87%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E6%96%B9%E6%B3%95%EF%BC%88%E5%9F%BA%E4%BA%8EMac%E4%B8%8A%E7%9A%84Typora%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%89/index.html">
+<meta property="og:site_name" content="Mona">
+<meta property="og:description" content="参考了：Hyemin Kim’s blog ​		在Markdown文档中添加网络图片时，可以使用命令![&#39;图片名称&#39;](图片网络地址)实现， ​		在Markdown文档中添加本地图片，可以进行以下设置 第一步 配置 建立**资源文件夹(Asset Floder)**，用来保存添加到博文中的本地图片  ​		在本地Hexo根目录下的source文件夹中创建一个名为 images">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/%E5%9C%A8Hexo%E5%8D%9A%E6%96%87%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E6%96%B9%E6%B3%95%EF%BC%88%E5%9F%BA%E4%BA%8EMac%E4%B8%8A%E7%9A%84Typora%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%89/01-%E8%AE%BE%E7%BD%AE%E5%9B%BE%E7%89%87%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84.png">
+<meta property="article:published_time" content="2022-05-12T03:36:33.000Z">
+<meta property="article:modified_time" content="2022-05-12T04:22:02.777Z">
+<meta property="article:author" content="Mona">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/%E5%9C%A8Hexo%E5%8D%9A%E6%96%87%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E6%96%B9%E6%B3%95%EF%BC%88%E5%9F%BA%E4%BA%8EMac%E4%B8%8A%E7%9A%84Typora%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%89/01-%E8%AE%BE%E7%BD%AE%E5%9B%BE%E7%89%87%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84.png">
+
+<link rel="canonical" href="http://example.com/2022/05/12/%E5%9C%A8Hexo%E5%8D%9A%E6%96%87%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E6%96%B9%E6%B3%95%EF%BC%88%E5%9F%BA%E4%BA%8EMac%E4%B8%8A%E7%9A%84Typora%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>在Hexo博文添加本地图片方法（基于Mac上的Typora编辑器） | Mona</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Mona</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">这是一个小小的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/12/%E5%9C%A8Hexo%E5%8D%9A%E6%96%87%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E6%96%B9%E6%B3%95%EF%BC%88%E5%9F%BA%E4%BA%8EMac%E4%B8%8A%E7%9A%84Typora%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mona">
+      <meta itemprop="description" content="Mona今天学习了吗？">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mona">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在Hexo博文添加本地图片方法（基于Mac上的Typora编辑器）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-05-12 11:36:33 / 修改时间：12:22:02" itemprop="dateCreated datePublished" datetime="2022-05-12T11:36:33+08:00">2022-05-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>参考了：<a target="_blank" rel="noopener" href="https://hyemin-kim.github.io/2020/05/12/Hexo-Insert-local-images/#%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E5%89%8D-%E8%BF%9B%E8%A1%8C%E9%85%8D%E7%BD%AE">Hyemin Kim’s blog</a></p>
+<p>​		在Markdown文档中添加网络图片时，可以使用命令<code>![&#39;图片名称&#39;](图片网络地址)</code>实现，</p>
+<p>​		在Markdown文档中添加本地图片，可以进行以下设置</p>
+<h3 id="第一步-配置"><a href="#第一步-配置" class="headerlink" title="第一步 配置"></a>第一步 配置</h3><ol>
+<li>建立**资源文件夹(Asset Floder)**，用来保存添加到博文中的本地图片</li>
+</ol>
+<p>​		在本地Hexo根目录下的source文件夹中创建一个名为 images 的文件夹</p>
+<ol start="2">
+<li>在Typora中设置图片的相对路径</li>
+</ol>
+<p>​		打开Typora的偏好设置 &gt; 图像，进行如下设置：</p>
+<p><img src="/../images/%E5%9C%A8Hexo%E5%8D%9A%E6%96%87%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E6%96%B9%E6%B3%95%EF%BC%88%E5%9F%BA%E4%BA%8EMac%E4%B8%8A%E7%9A%84Typora%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%89/01-%E8%AE%BE%E7%BD%AE%E5%9B%BE%E7%89%87%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84.png" alt="01-设置图片相对路径"></p>
+<p>​		此设置会使source&#x2F;images文件夹下新增一个与所编辑的markdown文档同名的文件夹，文档中所添加的 本地图片 都将存档于此（即拥有了如下路径：’hexo根目录’&#x2F;source&#x2F;images&#x2F;‘md文档名’&#x2F;‘图片名称’）)。</p>
+<p>​		撰写markdown文档时配置 图片根目录 ，使其能够同步到hexo博客中去</p>
+<p>​		撰写博文时，先点击Typora菜单栏中的格式 —&gt; 图像 —&gt; 设置图片根目录 , 将根目录配置为’hexo根目录’&#x2F;source。然后再撰写博文。【注：每篇需要添加本地图片的博文都要先进行此步骤】</p>
+<h3 id="第二步-图片导入方法"><a href="#第二步-图片导入方法" class="headerlink" title="第二步 图片导入方法"></a>第二步 图片导入方法</h3><h4 id="方法一-直接拖拽"><a href="#方法一-直接拖拽" class="headerlink" title="方法一 直接拖拽"></a>方法一 直接拖拽</h4><p>​		将原本存放于其他本地文件夹中的图片直接拖拽到文档中的相应位置中去</p>
+<p>​		此时图片会被自动存档至生成的同名文件夹’hexo根目录’&#x2F;source&#x2F;images&#x2F;‘md文档名’中</p>
+<p>​		文档中图片地址的代码会显示成 自动生成的相对路径，即&#x2F;images&#x2F;‘md文档名’&#x2F;‘图片名称’</p>
+<h4 id="方法二-利用相对路径调取"><a href="#方法二-利用相对路径调取" class="headerlink" title="方法二 利用相对路径调取"></a>方法二 利用相对路径调取</h4><p>​		当利用方法一插入了至少一张图片时（即已生成同名文件夹时），便可以把接下来要插入的图片复制到此同名文件夹中，在文档中利用相对路径调取图片。<br>​		所使用的命令是：<code>![图片显示名称](/images/&#39;md文档名&#39;/&#39;图片名称&#39;)</code><br><font color="lightblue"><strong>NOTE：</strong></font></p>
+<ol>
+<li><p>这里的图片显示名称不必与文件夹中保存的图片名称保持一致，’图片名称’中要记得包含图片格式（例如：tupian.jpg 或 picture.png 等)</p>
+</li>
+<li><p>当还没有利用方法1插入过图片时（即同名文件夹尚未生成时），不可以自己创建同名文件夹保存图片。亲测不好使！！（.md文档中可以显示，但是hexo博文中无法显示）</p>
+</li>
+</ol>
+<h3 id="第三步-图片存档结果"><a href="#第三步-图片存档结果" class="headerlink" title="第三步 图片存档结果"></a>第三步 图片存档结果</h3><p>​		在利用上述方法完成了含有本地图片的markdown博文后，我们的资源文件夹’hexo根目录’&#x2F;source&#x2F;images&#x2F;内最终会显示成什么样子呢？</p>
+<p>​		每一篇配置了图片根目录的博文，都会在’hexo根目录’&#x2F;source&#x2F;images&#x2F;文件夹中有一个与文档名称同名的文件夹’hexo根目录’&#x2F;source&#x2F;images&#x2F;‘md文档名’。</p>
+<p>​		该文件夹中会保存博文编写中曾经添加的所有本地图片。</p>
+<p>​		所有的含义是：即使编辑过程中某些本地图片在添加后又被删除了，它们也仍然会保留在文件夹中，即该文件夹会备份你在博文中添加的 所有本地图片历史<br>​		本地图片的含义是：这里只会保存插入的本地图片，而不会保存插入的网络图片。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/12/Python%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Python爬虫学习笔记">
+      <i class="fa fa-chevron-left"></i> Python爬虫学习笔记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">第一步 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E5%9B%BE%E7%89%87%E5%AF%BC%E5%85%A5%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">第二步 图片导入方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80-%E7%9B%B4%E6%8E%A5%E6%8B%96%E6%8B%BD"><span class="nav-number">2.1.</span> <span class="nav-text">方法一 直接拖拽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C-%E5%88%A9%E7%94%A8%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E8%B0%83%E5%8F%96"><span class="nav-number">2.2.</span> <span class="nav-text">方法二 利用相对路径调取</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E5%9B%BE%E7%89%87%E5%AD%98%E6%A1%A3%E7%BB%93%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">第三步 图片存档结果</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mona</p>
+  <div class="site-description" itemprop="description">Mona今天学习了吗？</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mona</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
