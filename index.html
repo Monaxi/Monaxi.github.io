@@ -173,7 +173,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-05-12 11:13:23 / 修改时间：11:22:35" itemprop="dateCreated datePublished" datetime="2022-05-12T11:13:23+08:00">2022-05-12</time>
+              <time title="创建时间：2022-05-12 11:13:23 / 修改时间：11:34:40" itemprop="dateCreated datePublished" datetime="2022-05-12T11:13:23+08:00">2022-05-12</time>
             </span>
 
           
@@ -203,10 +203,11 @@
 <p>​		登录百度，点击登录时，会请求login接口（?login），这个请求方法就是POST，可以看到username是_Louisa_Lau，密码password加密了。</p>
 <p><font color="ligblue"><strong>NOTE:</strong></font> GET将请求暴露在URL上，POST请求将参数放在了request body里，密码也加了密，相对安全了些。</p>
 <h3 id="请求头（Request-Header）"><a href="#请求头（Request-Header）" class="headerlink" title="请求头（Request Header）"></a>请求头（Request Header）</h3><p>​		在访问刚刚访问百度的时候，可以看到如下图所示的Request Header</p>
-<p><img src="/2022/05/12/Python%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/mona/blog/source/_posts/Python%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-RequestHeader.png"></p>
+<p><img src="/images/Python%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01-RequestHeader.png" alt="01-RequestHeader"></p>
 <p>​		在做HTTP请求时，除了提交一些参数以外，还要定义一些HTTP请求的头部信息（如Accept、Host、cookie、User-Agent等），这些参数在做爬虫时也会用到，通过这些信息迷惑服务器告诉他我们是正规请求。</p>
 <p>​		比如：可以在代码中设置cookie告诉服务器我们就是在这个浏览器请求的会话；User-Agent告诉服务器，我们是浏览器请求的。</p>
 <h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3><p>​		我们经常看到404 NOT FOUND这种界面，这些404、200、301、502什么的就是服务器的响应码。一般服务器返回200，就说明我们成功请求了，如图：</p>
+<p><img src="/images/Python%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/02-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%94%E5%9B%9E202.png" alt="02-服务器返回202"></p>
 
       
     </div>
