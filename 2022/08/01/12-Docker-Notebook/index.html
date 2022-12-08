@@ -1,0 +1,294 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>12-Docker_Notebook | Mona</title><meta name="author" content="Mona"><meta name="copyright" content="Mona"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="DockerDocker能做什么将应用、依赖包打包到一个容器中，然后发布到流星的Linux机器上，也可以实现虚拟化。 应用场景：  Web应用的自动化打包和发布； 自动化测试和持续集成、发布； 在服务型环境中部署和调整数据库或其他后台应用； 从头编译或扩展现有的OpenShift或Cloud Foundry平台搭建自己的PaaS环境；  常用的命令 使用docker run命令在容器内运行一个应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12-Docker_Notebook">
+<meta property="og:url" content="http://monaxi.github.io/2022/08/01/12-Docker-Notebook/index.html">
+<meta property="og:site_name" content="Mona">
+<meta property="og:description" content="DockerDocker能做什么将应用、依赖包打包到一个容器中，然后发布到流星的Linux机器上，也可以实现虚拟化。 应用场景：  Web应用的自动化打包和发布； 自动化测试和持续集成、发布； 在服务型环境中部署和调整数据库或其他后台应用； 从头编译或扩展现有的OpenShift或Cloud Foundry平台搭建自己的PaaS环境；  常用的命令 使用docker run命令在容器内运行一个应用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/Monaxi/Mona-study/blob/main/blog/wallhaven-wqgr9x_1920x1080.png?raw=true">
+<meta property="article:published_time" content="2022-08-01T02:45:38.000Z">
+<meta property="article:modified_time" content="2022-08-02T06:08:00.246Z">
+<meta property="article:author" content="Mona">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Monaxi/Mona-study/blob/main/blog/wallhaven-wqgr9x_1920x1080.png?raw=true"><link rel="shortcut icon" href="https://github.com/Monaxi/Mona-study/blob/main/blog/me.JPG?raw=true"><link rel="canonical" href="http://monaxi.github.io/2022/08/01/12-Docker-Notebook/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '12-Docker_Notebook',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-02 14:08:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://github.com/Monaxi/Mona-study/blob/main/blog/me.JPG?raw=true" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://github.com/Monaxi/Mona-study/blob/main/blog/default_top_img.png?raw=true')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Mona</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">12-Docker_Notebook</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-01T02:45:38.000Z" title="发表于 2022-08-01 10:45:38">2022-08-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-02T06:08:00.246Z" title="更新于 2022-08-02 14:08:00">2022-08-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="12-Docker_Notebook"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="Docker能做什么"><a href="#Docker能做什么" class="headerlink" title="Docker能做什么"></a>Docker能做什么</h2><p>将<strong>应用、依赖包</strong>打包到一个容器中，然后发布到流星的Linux机器上，也可以实现虚拟化。</p>
+<p><strong>应用场景</strong>：</p>
+<ul>
+<li>Web应用的自动化打包和发布；</li>
+<li>自动化测试和持续集成、发布；</li>
+<li>在服务型环境中部署和调整数据库或其他后台应用；</li>
+<li>从头编译或扩展现有的OpenShift或Cloud Foundry平台搭建自己的PaaS环境；</li>
+</ul>
+<h2 id="常用的命令"><a href="#常用的命令" class="headerlink" title="常用的命令"></a>常用的命令</h2><ul>
+<li>使用<code>docker run</code>命令在容器内运行一个应用程序（创建一个容器）</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ docker <span class="keyword">run</span><span class="language-bash"> ubuntu:15.10 /bin/echo <span class="string">&quot;Hello world&quot;</span></span></span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>使用<code>-i</code>、<code>-t</code>参数，让docker运行的容器实现对话能力</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ docker <span class="keyword">run</span><span class="language-bash"> -i -t ubuntu:15.10 /bin/bash</span></span><br><span class="line">root@<span class="number">1</span>b658ae35706:/<span class="comment"># </span></span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<p><strong>-i</strong>：允许对容器内的标准输入（STDIN）进行交互</p>
+<p><strong>-t</strong>：在新容器内指定一个伪终端或者终端</p>
+<p>**root@1b658ae35706:&#x2F;#**：进入了一个ubuntu:15.10系统的容器</p>
+<ul>
+<li>使用<code>cat /proc/version</code>查看当前系统版本信息</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@<span class="number">1</span>b658ae35706:/<span class="comment"># cat /proc/version</span></span><br><span class="line">Linux version <span class="number">5.10</span>.<span class="number">47</span>-linuxkit (root@buildkitsandbox) (gcc (Alpine <span class="number">10.2</span>.<span class="number">1</span>_pre1) <span class="number">10.2</span>.<span class="number">1</span> <span class="number">20201203</span>, GNU ld (GNU Binutils) <span class="number">2.35</span>.<span class="number">2</span>) <span class="comment">#1 SMP Sat Jul 3 21:51:47 UTC 2021</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>ls</code>查看当前目录下的文件列表</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@<span class="number">1</span>b658ae35706:/<span class="comment"># ls</span></span><br><span class="line">bin   dev  home  lib64  mnt  proc  <span class="keyword">run</span><span class="language-bash">   srv  tmp  var</span></span><br><span class="line">boot  etc  lib   media  opt  root  sbin  sys  usr</span><br><span class="line">root@<span class="number">1</span>b658ae35706:/<span class="comment"># </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>exit</code>命令或<code>CTRL+D</code>退出容器</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@<span class="number">1</span>b658ae35706:/<span class="comment"># exit</span></span><br><span class="line">exit</span><br><span class="line">➜  ~ </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>-d</code>让容器在后台运行；</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker <span class="keyword">run</span><span class="language-bash"> -d ubuntu:15.10 /bin/sh -c <span class="string">&quot;while true; do echo hello world; sleep 1; done&quot;</span></span></span><br><span class="line"><span class="number">449</span>af35382666478c85c772766f3b17c47e6d242343756819ff9fc81261ea880</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<p>输出的长字符串叫做<strong>容器ID</strong>，对每个容器来说都是唯一的，可以通过容器ID查看对应的容器发生了什么；</p>
+<ul>
+<li>使用<code>docker ps</code>来查看容器是否在运行</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker ps</span><br><span class="line">CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS     NAMES</span><br><span class="line"><span class="number">449</span>af3538266   ubuntu:<span class="number">15.10</span>   <span class="string">&quot;/bin/sh -c &#x27;while t…&quot;</span>   <span class="number">19</span> seconds ago   Up <span class="number">18</span> seconds             romantic_chebyshev</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<p><strong>CONTAINER ID:</strong> 容器 ID。</p>
+<p><strong>IMAGE:</strong> 使用的镜像。</p>
+<p><strong>COMMAND:</strong> 启动容器时运行的命令。</p>
+<p><strong>CREATED:</strong> 容器的创建时间。</p>
+<p><strong>STATUS:</strong> 容器状态。</p>
+<p>状态有7种：</p>
+<ul>
+<li>created（已创建）</li>
+<li>restarting（重启中）</li>
+<li>running 或 Up（运行中）</li>
+<li>removing（迁移中）</li>
+<li>paused（暂停）</li>
+<li>exited（停止）</li>
+<li>dead（死亡）</li>
+</ul>
+<p><strong>PORTS:</strong> 容器的端口信息和使用的连接类型（tcp\udp）。</p>
+<p><strong>NAMES:</strong> 自动分配的容器名称。</p>
+<ul>
+<li>使用<code>-P</code>将容器内部使用的网络端口随机映射到我们使用的主机上</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker <span class="keyword">run</span><span class="language-bash"> -d -P training/webapp python app.py</span></span><br><span class="line">b97c1571c833b87f41bf67f0292d8c2a7b66fe7d48b9691b1a0fcc2f9523cc5f</span><br><span class="line">➜  ~ docker ps</span><br><span class="line">CONTAINER ID   IMAGE             COMMAND           CREATED          STATUS          PORTS                     NAMES</span><br><span class="line">b97c1571c833   training/webapp   <span class="string">&quot;python app.py&quot;</span>   <span class="number">13</span> seconds ago   Up <span class="number">12</span> seconds   <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">55000</span>-&gt;<span class="number">5000</span>/tcp   youthful_jackson</span><br><span class="line">➜  ~ </span><br></pre></td></tr></table></figure>
+
+<p>结果多了PORTS</p>
+<p><strong>PORTS</strong>：端口信息</p>
+<h2 id="镜像使用中常用的命令"><a href="#镜像使用中常用的命令" class="headerlink" title="镜像使用中常用的命令"></a>镜像使用中常用的命令</h2><ul>
+<li>使用 <code>docker images</code> 来列出本地主机上的镜像</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker images</span><br><span class="line">REPOSITORY             TAG       IMAGE ID       CREATED         SIZE</span><br><span class="line">test/ubuntu            v1        <span class="number">2</span>d18aec27708   <span class="number">2</span> hours ago     <span class="number">119</span>MB</span><br><span class="line">ubuntu                 latest    <span class="number">27941809078</span>c   <span class="number">7</span> weeks ago     <span class="number">77.8</span>MB</span><br><span class="line">debian_with_software   v1        <span class="number">5305</span>f878934c   <span class="number">8</span> weeks ago     <span class="number">1.61</span>GB</span><br><span class="line">debian                 stable    b7903d928a17   <span class="number">2</span> months ago    <span class="number">124</span>MB</span><br><span class="line">centos                 latest    <span class="number">5</span>d0da3dc9764   <span class="number">10</span> months ago   <span class="number">231</span>MB</span><br><span class="line">ubuntu                 <span class="number">15.10</span>     <span class="number">9</span>b9cb95443b5   <span class="number">6</span> years ago     <span class="number">137</span>MB</span><br><span class="line">training/webapp        latest    <span class="number">6</span>fae60ef3446   <span class="number">7</span> years ago     <span class="number">349</span>MB</span><br><span class="line">➜  ~ </span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<p><strong>REPOSITORY：</strong>表示镜像的仓库源</p>
+<p><strong>TAG：</strong>镜像的标签</p>
+<p><strong>IMAGE ID：</strong>镜像ID</p>
+<p><strong>CREATED：</strong>镜像创建时间</p>
+<p><strong>SIZE：</strong>镜像大小</p>
+<ul>
+<li>如果要<strong>使用</strong>版本为15.10的ubuntu系统镜像来运行容器时，命令如下：</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~$ docker <span class="keyword">run</span><span class="language-bash"> -t -i ubuntu:15.10 /bin/bash </span></span><br><span class="line">root@d77ccb2e5cca:/<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<p><strong>-i</strong>: 交互式操作</p>
+<p><strong>-t</strong>: 终端。</p>
+<p><strong>ubuntu:15.10</strong>: 这是指用 ubuntu 15.10 版本镜像为基础来启动容器</p>
+<p><strong>&#x2F;bin&#x2F;bash</strong>：放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 &#x2F;bin&#x2F;bash</p>
+<p>如果不指定一个镜像的版本标签，例如只使用 ubuntu，docker，将<strong>默认使用 ubuntu:latest 镜像</strong>。</p>
+<ul>
+<li>使用<code>docker pull</code>获取新镜像方式</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker pull ubuntu:<span class="number">13.10</span></span><br><span class="line"><span class="number">13.10</span>: Pulling <span class="keyword">from</span> library/ubuntu</span><br><span class="line">Image docker.io/library/ubuntu:<span class="number">13.10</span> uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/</span><br><span class="line">a3ed95caeb02: Pull complete </span><br><span class="line"><span class="number">0</span>d8710fc57fd: Pull complete </span><br><span class="line"><span class="number">5037</span>c5cd623d: Pull complete </span><br><span class="line"><span class="number">83</span>b53423b49f: Pull complete </span><br><span class="line">e9e8bd3b94ab: Pull complete </span><br><span class="line"><span class="number">7</span>db00e6b6e5e: Pull complete </span><br><span class="line">Digest: sha256:<span class="number">403105</span>e61e2d540187da20d837b6a6e92efc3eb4337da9c04c191fb5e28c44dc</span><br><span class="line">Status: Downloaded newer image for ubuntu:<span class="number">13.10</span></span><br><span class="line">docker.io/library/ubuntu:<span class="number">13.10</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>使用<code>docker search</code>查找镜像</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker search httpd</span><br><span class="line">NAME                                    DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">httpd                                   The Apache HTTP Server Project                  <span class="number">4101</span>      [OK]       </span><br><span class="line">centos/httpd-<span class="number">24</span>-centos7                 Platform for running Apache httpd <span class="number">2.4</span> or bui…   <span class="number">44</span>                   </span><br><span class="line">centos/httpd                                                                            <span class="number">35</span>                   [OK]</span><br><span class="line">solsson/httpd-openidc                   mod_auth_openidc on official httpd image, ve…   <span class="number">2</span>                    [OK]</span><br><span class="line">clearlinux/httpd                        httpd HyperText Transfer Protocol (HTTP) ser…   <span class="number">2</span>                    </span><br><span class="line">hypoport/httpd-cgi                      httpd-cgi                                       <span class="number">2</span>                    [OK]</span><br><span class="line">nnasaki/httpd-ssi                       SSI enabled Apache <span class="number">2.4</span> on Alpine Linux          <span class="number">1</span>                    </span><br><span class="line">dockerpinata/httpd                                                                      <span class="number">1</span>                    </span><br><span class="line">jonathanheilmann/httpd-alpine-rewrite   httpd:alpine with enabled mod_rewrite           <span class="number">1</span>                    [OK]</span><br><span class="line">inanimate/httpd-ssl                     A play container with httpd, ssl enabled, an…   <span class="number">1</span>                    [OK]</span><br><span class="line">centos/httpd-<span class="number">24</span>-centos8                                                                 <span class="number">1</span>                    </span><br><span class="line">dariko/httpd-rproxy-ldap                Apache httpd reverse proxy with LDAP authent…   <span class="number">1</span>                    [OK]</span><br><span class="line">manageiq/httpd                          Container with httpd, built on CentOS for Ma…   <span class="number">1</span>                    [OK]</span><br><span class="line">publici/httpd                           httpd:latest                                    <span class="number">1</span>                    [OK]</span><br><span class="line">httpdocker/kubia                                                                        <span class="number">0</span>                    </span><br><span class="line">patrickha/httpd-err                                                                     <span class="number">0</span>                    </span><br><span class="line">e2eteam/httpd                                                                           <span class="number">0</span>                    </span><br><span class="line">amd64/httpd                             The Apache HTTP Server Project                  <span class="number">0</span>                    </span><br><span class="line">manageiq/httpd_configmap_generator      Httpd Configmap Generator                       <span class="number">0</span>                    [OK]</span><br><span class="line">manasip/httpd                                                                           <span class="number">0</span>                    </span><br><span class="line">httpdss/archerysec                      ArcherySec repository                           <span class="number">0</span>                    [OK]</span><br><span class="line">ppc64le/httpd                           The Apache HTTP Server Project                  <span class="number">0</span>                    </span><br><span class="line">paketobuildpacks/httpd                                                                  <span class="number">0</span>                    </span><br><span class="line"><span class="number">19022021</span>/httpd-connection_test          This httpd image will test the connectivity …   <span class="number">0</span>                    </span><br><span class="line">sandeep1988/httpd-new                   httpd-new                                       <span class="number">0</span>                    </span><br><span class="line">➜  ~ </span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<p><strong>NAME:</strong> 镜像仓库源的名称</p>
+<p><strong>DESCRIPTION:</strong> 镜像的描述</p>
+<p><strong>OFFICIAL:</strong> 是否 docker 官方发布</p>
+<p><strong>stars:</strong> 类似 Github 里面的 star，表示点赞、喜欢的意思。</p>
+<p><strong>AUTOMATED:</strong> 自动构建。</p>
+<p>NOTE：也可以从<a target="_blank" rel="noopener" href="https://hub.docker.com/">DockerHub网站</a>搜索镜像</p>
+<ul>
+<li>使用<code>docker pull</code>拖取&#x2F;下载镜像</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker pull httpd</span><br></pre></td></tr></table></figure>
+
+<p>下载完成后使用<code>docker run</code>来运行这个镜像</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker <span class="keyword">run</span><span class="language-bash"> httpd</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>docker rmi</code>删除镜像</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker rmi ubuntu:<span class="number">13.10</span> </span><br><span class="line">Untagged: ubuntu:<span class="number">13.10</span></span><br><span class="line">Untagged: ubuntu@sha256:<span class="number">403105</span>e61e2d540187da20d837b6a6e92efc3eb4337da9c04c191fb5e28c44dc</span><br><span class="line">Deleted: sha256:<span class="number">7</span>f020f7bf34554411031ec0d4f2ab46a2976dad403e1c26bc21dc1bf4c48c8aa</span><br><span class="line">Deleted: sha256:<span class="number">2</span>aac093d13faafda4d0da3534d30274bcc4e5475b1e126c84b9d670862f5e4ef</span><br><span class="line">Deleted: sha256:c676fe3dd3ceb6442e8b23350de88adc6546a52f75bd92dbb1a789b7c6de0fcf</span><br><span class="line">Deleted: sha256:<span class="number">7</span>c6a37fb8fe6a41aaf7c6c7a2cc3d448c01df026b2056a9f35e490e7bf6285cc</span><br><span class="line">Deleted: sha256:b0e8be8278c28daa541ad564fc91dbea99263caa6e5e68db033061c5e08f0315</span><br><span class="line">Deleted: sha256:<span class="number">78</span>dcbd700c6678a7af4422e0ad516628852973a255526f4b617f33db218e1075</span><br><span class="line">Deleted: sha256:<span class="number">5</span>f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef</span><br><span class="line">➜  ~ docker images</span><br><span class="line">REPOSITORY             TAG       IMAGE ID       CREATED         SIZE</span><br><span class="line">test/ubuntu            v1        <span class="number">2</span>d18aec27708   <span class="number">3</span> hours ago     <span class="number">119</span>MB</span><br><span class="line">ubuntu                 latest    <span class="number">27941809078</span>c   <span class="number">7</span> weeks ago     <span class="number">77.8</span>MB</span><br><span class="line">debian_with_software   v1        <span class="number">5305</span>f878934c   <span class="number">8</span> weeks ago     <span class="number">1.61</span>GB</span><br><span class="line">debian                 stable    b7903d928a17   <span class="number">2</span> months ago    <span class="number">124</span>MB</span><br><span class="line">centos                 latest    <span class="number">5</span>d0da3dc9764   <span class="number">10</span> months ago   <span class="number">231</span>MB</span><br><span class="line">ubuntu                 <span class="number">15.10</span>     <span class="number">9</span>b9cb95443b5   <span class="number">6</span> years ago     <span class="number">137</span>MB</span><br><span class="line">training/webapp        latest    <span class="number">6</span>fae60ef3446   <span class="number">7</span> years ago     <span class="number">349</span>MB</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用的Linux命令"><a href="#常用的Linux命令" class="headerlink" title="常用的Linux命令"></a>常用的Linux命令</h2><p>使用<code>scp</code>复制文件或者文件夹到服务器</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp -r ./Desktop/docker huawei:~/lyn</span><br><span class="line">Enter passphrase for key <span class="string">&#x27;/Users/wind/.ssh/id_rsa&#x27;</span>:</span><br><span class="line">Image-Classification-master.zip                                                                                                                                <span class="number">9</span>%  <span class="number">158</span>MB   <span class="number">1.3</span>MB/s   <span class="number">19</span>:<span class="number">17</span> ETA^</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://monaxi.github.io">Mona</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://monaxi.github.io/2022/08/01/12-Docker-Notebook/">http://monaxi.github.io/2022/08/01/12-Docker-Notebook/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://monaxi.github.io" target="_blank">Mona</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://github.com/Monaxi/Mona-study/blob/main/blog/wallhaven-wqgr9x_1920x1080.png?raw=true" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/07/28/11-WeChat-miniprogram/"><img class="next-cover" src="https://github.com/Monaxi/Mona-study/blob/main/blog/wallhaven-wqgr9x_1920x1080.png?raw=true" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">11-WeChat_miniprogram</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://github.com/Monaxi/Mona-study/blob/main/blog/me.JPG?raw=true" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Mona</div><div class="author-info__description">Mona今天学习了吗？</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Monaxi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Monaxi" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:monaxxxxxxi@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my blog~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker"><span class="toc-number">1.</span> <span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text">Docker能做什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">常用的命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">镜像使用中常用的命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84Linux%E5%91%BD%E4%BB%A4"><span class="toc-number">1.4.</span> <span class="toc-text">常用的Linux命令</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/01/12-Docker-Notebook/" title="12-Docker_Notebook"><img src="https://github.com/Monaxi/Mona-study/blob/main/blog/wallhaven-wqgr9x_1920x1080.png?raw=true" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="12-Docker_Notebook"/></a><div class="content"><a class="title" href="/2022/08/01/12-Docker-Notebook/" title="12-Docker_Notebook">12-Docker_Notebook</a><time datetime="2022-08-01T02:45:38.000Z" title="发表于 2022-08-01 10:45:38">2022-08-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/28/11-WeChat-miniprogram/" title="11-WeChat_miniprogram"><img src="https://github.com/Monaxi/Mona-study/blob/main/blog/wallhaven-wqgr9x_1920x1080.png?raw=true" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="11-WeChat_miniprogram"/></a><div class="content"><a class="title" href="/2022/07/28/11-WeChat-miniprogram/" title="11-WeChat_miniprogram">11-WeChat_miniprogram</a><time datetime="2022-07-28T03:50:44.000Z" title="发表于 2022-07-28 11:50:44">2022-07-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/09/10-PCL-Notebook-2/" title="10-PCL_Notebook_2"><img src="https://github.com/Monaxi/Mona-study/blob/main/blog/wallhaven-wqgr9x_1920x1080.png?raw=true" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="10-PCL_Notebook_2"/></a><div class="content"><a class="title" href="/2022/07/09/10-PCL-Notebook-2/" title="10-PCL_Notebook_2">10-PCL_Notebook_2</a><time datetime="2022-07-09T07:41:42.000Z" title="发表于 2022-07-09 15:41:42">2022-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/27/09-LeetCode/" title="09-LeetCode"><img src="https://github.com/Monaxi/Mona-study/blob/main/blog/wallhaven-wqgr9x_1920x1080.png?raw=true" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="09-LeetCode"/></a><div class="content"><a class="title" href="/2022/06/27/09-LeetCode/" title="09-LeetCode">09-LeetCode</a><time datetime="2022-06-27T14:37:22.000Z" title="发表于 2022-06-27 22:37:22">2022-06-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/21/08-PCL-Notebook/" title="PCL Notebook"><img src="https://github.com/Monaxi/Mona-study/blob/main/blog/%E9%BB%98%E8%AE%A4%E5%9B%BE%E7%89%87.png?raw=true" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PCL Notebook"/></a><div class="content"><a class="title" href="/2022/06/21/08-PCL-Notebook/" title="PCL Notebook">PCL Notebook</a><time datetime="2022-06-21T09:45:07.000Z" title="发表于 2022-06-21 17:45:07">2022-06-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By Mona</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5/instantpage.min.js" type="module"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
